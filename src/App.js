@@ -29,7 +29,7 @@ export default class App extends Component {
 
     submit = (e) => {
       console.log(this.state);
-      fetch(`http://api.railwayapi.com/v2/between/source/${this.state.sourceStation}/dest/${this.state.destinationStation}/date/${this.state.date}/apikey/cq5cp33gv8/`)
+      fetch(`//api.railwayapi.com/v2/between/source/${this.state.sourceStation}/dest/${this.state.destinationStation}/date/${this.state.date}/apikey/cq5cp33gv8/`)
       .then(
         (a)=>a.json()
       ).then( result  => {
