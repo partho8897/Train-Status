@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+</head>
+
+<body>
+	<form>
+		<input type="text" placeholder="Source Station" id="source" value="ghy"></input>
+		<br>
+		<input type="text" placeholder="Destination Station" id="dest" value="ndls"></input>
+		<br>
+		<input type="text" placeholder="Date(dd-mm-yyyy)" id="date" value="04-06-2018"></input>
+		<br>
+		<input type="text" placeholder="via"></input>
+		<button onclick="run()" value="Submit" type="button">Submit</button>
+	</form>
+	<br>
+	<div>
+		<table id="myTable">
+			
+		  </table>
+	</div>
+</body>
+<script>
+
+	function run()
+	{
+		let a;
+		function reqListener (){
+			a = JSON.parse(this.responseText);
+			let i=0;
+			for (i in a.trains){
+			console.log(a.trains[i])}
+			createTable();
+		}
+
+		function createTable() {
+    		var table = document.getElementById("myTable");
+			var row=table.insertRow(0);
+			var t_name=table.insertCell(0);
+			var arr_time=table.insertCell(0);
+			var dest_time=table.insertCell(0);
+			t_name.innerHTML="TRAIN NAME";
+			arr_time.innerHTML="SOURCE DEPARTURE TIME";
+			dest_time.innerHTML="DESTINATION ARRIVAL TIME";
+
+			for(let i in a.trains){
+				var row=table.insertRow(i+1);
+				var t_name=table.insertCell(i+1);
+				var arr_time=table.insertCell(i+1);
+				var dest_time=table.insertCell(i+1);
+				t_name.innerHTML=a.trains[i].name.value;
+				arr_time.innerHTML=a.trains[i].from_station.src_departure_time.value;
+				dest_time.innerHTML=dest_arrival_time.value;
+			}
+		}
+
+		var oReq = new XMLHttpRequest();
+		oReq.addEventListener("load", reqListener);
+		oReq.open("GET", `https://api.railwayapi.com/v2/between/source/${source.value}/dest/${dest.value}/date/${date.value}/apikey/cq5cp33gv8/`);
+		oReq.send();
+	}
+
+</script>
+
+</html>
