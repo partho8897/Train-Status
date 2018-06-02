@@ -6,7 +6,10 @@ export default class App extends Component {
       destinationStation:"ndls",
       date:"03-06-2018",
       submit:"",
-      trainData:[]
+      trainData:[],
+      selectedTrain:{
+        classes:[]
+      }
     };
 
     onSourceStationChange = (e) => {
@@ -41,16 +44,19 @@ export default class App extends Component {
     }
 
     tdOnNameclick = (train) => {
+      this.setState({
+        selectedTrain: train
+      });
       console.log(train)
-      /*fetch(`https://api.railwayapi.com/v2/check-seat/train/<train number>/source/<stn code>/dest/<dest code>/date/<dd-mm-yyyy>/pref/<class code>/quota/<quota code>/apikey/cq5cp33gv8  /`)
+      fetch(`https://api.railwayapi.com/v2/check-seat/train/${train.number}/source/${train.from_station.code}/dest/${train.to_station.code}/date/${train.date}/pref/<class code>/quota/GN/apikey/cq5cp33gv8  /`)
       .then(
         (a)=>a.json()
       ).then( result  => {
         console.log(result);
         this.setState({
-          trainData: result.trains
+          trainClass: result.trains
         });
-      });*/
+      });
     }
 
     render() {
@@ -84,9 +90,19 @@ export default class App extends Component {
                         <td>{train.dest_arrival_time}</td>
                         <td>{train.travel_time}</td>
                         </tr>
-                    })
+                    }
+                  )
                   }  
                 </tbody> 
+            </table>
+            <table>
+                <thead>
+                <tr> {   
+                    this.state.selectedTrain.classes.map(selTrainClass => {
+                      return (<th key={selTrainClass.code}>{selTrainClass.code}</th>);
+                    })}
+                    </tr>
+                </thead>
             </table>
     	</form>
     );
