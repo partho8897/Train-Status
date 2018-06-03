@@ -88,7 +88,7 @@ export default class App extends Component {
     });
 
     return (
-      <div>
+      <div className="inp"><br/>
         <form>
           <div className="form-row">
             <div className="col">
@@ -115,6 +115,8 @@ export default class App extends Component {
                 placeholder="Date(dd-mm-yyyy)"
               />
             </div>
+            <br/>
+            <br/>
             <div className="col">
               <button
                 className="btn btn-primary"
