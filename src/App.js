@@ -3,9 +3,9 @@ import "./style.css";
 
 export default class App extends Component {
   state = {
-    sourceStation: "jp",
-    destinationStation: "kota",
-    date: "11-06-2018",
+    sourceStation: "",
+    destinationStation: "",
+    date: "",
     trainData: [],
     trainAvailabilty: {},
     selectedTrain: {
